@@ -13,8 +13,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   var pages = [
-    ProfileScreen(),
-    GalleryScreen(),
+    {
+      "title": "Profile",
+      "screen": ProfileScreen(),
+    },
+    {
+      "title": "Gallery",
+      "screen": GalleryScreen(),
+    },
   ];
 
   _setCurrentIndex(int index) {
@@ -27,17 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        body: pages[_currentIndex],
+        appBar: AppBar(title: Text(pages[_currentIndex]["title"])),
+        body: pages[_currentIndex]["screen"],
         bottomNavigationBar: BottomNavigationBar(
           onTap: _setCurrentIndex,
+          currentIndex: _currentIndex,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.people),
-              label: "profile",
+              label: "ข้อมูลส่วนตัว",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.photo_album),
-              label: "Gallery",
+              label: "แกลเลอรี่",
             ),
           ],
         ),
